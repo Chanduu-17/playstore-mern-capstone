@@ -1,0 +1,24 @@
+body {
+    background: #ddddde;
+    /* background: linear-gradient(135deg, rgb(181, 248, 181), rgb(243, 201, 201), rgb(252, 252, 211)); */
+}
+
+.hero-card {
+    background: linear-gradient(135deg, #3683f6, #6ea8fe);
+    color: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(13, 110, 253, .18);
+}
+
+.auth-card {
+    max-width: 450px;
+    margin-top: 2rem;
+    background: linear-gradient(120deg, rgb(120, 180, 156), rgb(90, 90, 74));
+}
+
+.card {
+    border: 0;
+    border-radius: 1rem;
+
+}

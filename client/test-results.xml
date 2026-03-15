@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="18.227" tests="4" failures="4">
+  <testsuite name="Root Suite" timestamp="2026-03-15T10:42:43" tests="0" file="cypress\e2e\home.cy.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="Home Page" timestamp="2026-03-15T10:42:43" tests="4" time="18.224" failures="4">
+    <testcase name="Home Page loads the homepage successfully" time="0.000" classname="loads the homepage successfully">
+      <failure message="Timed out retrying after 4000ms: Expected to find content: &apos;Welcome to Play Store&apos; but never did." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Welcome to Play Store' but never did.
+    at Context.eval (webpack://playstore-client/./cypress/e2e/home.cy.js:8:41)]]></failure>
+    </testcase>
+    <testcase name="Home Page displays the categories and top apps" time="0.000" classname="displays the categories and top apps">
+      <failure message="Timed out retrying after 4000ms: Expected to find content: &apos;Top Apps&apos; within the element: &lt;div.py-4.container&gt; but never did." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: Expected to find content: 'Top Apps' within the element: <div.py-4.container> but never did.
+    at Context.eval (webpack://playstore-client/./cypress/e2e/home.cy.js:13:46)]]></failure>
+    </testcase>
+    <testcase name="Home Page filters apps by category when clicked" time="0.000" classname="filters apps by category when clicked">
+      <failure message="Timed out retrying after 4000ms: Expected to find element: `.list-group-item`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: Expected to find element: `.list-group-item`, but never found it.
+    at Context.eval (webpack://playstore-client/./cypress/e2e/home.cy.js:20:7)]]></failure>
+    </testcase>
+    <testcase name="Home Page searches for apps via the navbar search" time="0.000" classname="searches for apps via the navbar search">
+      <failure message="Timed out retrying after 4000ms: Expected to find element: `input[placeholder=&quot;Search apps...&quot;]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: Expected to find element: `input[placeholder="Search apps..."]`, but never found it.
+    at Context.eval (webpack://playstore-client/./cypress/e2e/home.cy.js:28:7)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>
