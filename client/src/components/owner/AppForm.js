@@ -25,24 +25,53 @@ export default function AppForm({ onSubmit, editingApp, onCancel }) {
   };
 
   return (
-    <Form onSubmit={submit} className="card shadow-sm p-3 mb-4">
-      <h5>{editingApp ? 'Edit App' : 'Add New App'}</h5>
+    <Form onSubmit={submit} className="app-form">
       <Row className="g-3">
-        <Col md={6}><Form.Control name="name" placeholder="App name" value={form.name} onChange={handleChange} required /></Col>
-        <Col md={3}><Form.Control name="genre" placeholder="Genre" value={form.genre} onChange={handleChange} required /></Col>
-        <Col md={3}><Form.Control name="version" placeholder="Version" value={form.version} onChange={handleChange} required /></Col>
-        <Col md={4}>
-          <Form.Select name="category" value={form.category} onChange={handleChange}>
-            <option value="games">Games</option><option value="beauty">Beauty</option><option value="fashion">Fashion</option><option value="women">Women</option><option value="health">Health</option><option value="social media">Social Media</option>
+        <Col md={12}>
+          <Form.Label className="small fw-semibold">Application Name</Form.Label>
+          <Form.Control name="name" placeholder="e.g. Super Productivity" value={form.name} onChange={handleChange} required />
+        </Col>
+        <Col md={6}>
+          <Form.Label className="small fw-semibold">Genre</Form.Label>
+          <Form.Control name="genre" placeholder="e.g. Action" value={form.genre} onChange={handleChange} required />
+        </Col>
+        <Col md={6}>
+          <Form.Label className="small fw-semibold">Version</Form.Label>
+          <Form.Control name="version" placeholder="e.g. 1.0.0" value={form.version} onChange={handleChange} required />
+        </Col>
+        <Col md={12}>
+          <Form.Label className="small fw-semibold">Category</Form.Label>
+          <Form.Select name="category" value={form.category} onChange={handleChange} className="form-select">
+            <option value="games">Games</option>
+            <option value="beauty">Beauty</option>
+            <option value="fashion">Fashion</option>
+            <option value="women">Women</option>
+            <option value="health">Health</option>
+            <option value="social media">Social Media</option>
           </Form.Select>
         </Col>
-        <Col md={8}><Form.Control name="imageUrl" placeholder="Image URL" value={form.imageUrl} onChange={handleChange} /></Col>
-        <Col md={12}><Form.Control as="textarea" rows={3} name="description" placeholder="Description" value={form.description} onChange={handleChange} required /></Col>
-        <Col md={12}><Form.Control name="features" placeholder="Features separated by comma" value={form.features} onChange={handleChange} /></Col>
+        <Col md={12}>
+          <Form.Label className="small fw-semibold">Icon URL</Form.Label>
+          <Form.Control name="imageUrl" placeholder="https://example.com/icon.png" value={form.imageUrl} onChange={handleChange} />
+        </Col>
+        <Col md={12}>
+          <Form.Label className="small fw-semibold">Description</Form.Label>
+          <Form.Control as="textarea" rows={3} name="description" placeholder="Describe your app..." value={form.description} onChange={handleChange} required />
+        </Col>
+        <Col md={12}>
+          <Form.Label className="small fw-semibold">Key Features (comma separated)</Form.Label>
+          <Form.Control name="features" placeholder="Cloud Sync, Dark Mode, Offline..." value={form.features} onChange={handleChange} />
+        </Col>
       </Row>
-      <div className="mt-3 d-flex gap-2">
-        <Button type="submit">{editingApp ? 'Update App' : 'Create App'}</Button>
-        {editingApp && <Button variant="secondary" onClick={onCancel}>Cancel</Button>}
+      <div className="mt-4 d-grid gap-2">
+        <Button type="submit" variant="primary" className="py-2">
+          {editingApp ? 'Update Application' : 'Create Application'}
+        </Button>
+        {editingApp && (
+          <Button variant="outline-secondary" onClick={onCancel} className="py-2">
+            Cancel Edit
+          </Button>
+        )}
       </div>
     </Form>
   );

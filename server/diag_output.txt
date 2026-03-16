@@ -1,0 +1,6 @@
+Connected to MongoDB
+Testing with App ID (string): "69b29a7732c4b22aed47fd33"
+Testing with App ID (ObjectId): 69b29a7732c4b22aed47fd33
+Users found using string: 0
+Users found using ObjectId: 0
+User.find(...).countDocuments() using string: 0

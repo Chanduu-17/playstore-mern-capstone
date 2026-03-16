@@ -51,3 +51,28 @@ exports.updateProfile = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.getAllUsers = async (req, res, next) => {
+    try {
+        const users = await User.find().select('-password');
+        res.json({ success: true, users });
+    } catch (error) {
+        next(error);
+    }
+};
+
+exports.promoteToAdmin = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        user.role = 'admin';
+        await user.save();
+
+        res.json({ success: true, message: 'User promoted to admin successfully' });
+    } catch (error) {
+        next(error);
+    }
+};

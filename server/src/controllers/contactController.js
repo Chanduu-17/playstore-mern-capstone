@@ -23,7 +23,7 @@ exports.submitContactForm = async (req, res) => {
             createNotification({
                 user: owner._id,
                 title: 'New Contact Form Message',
-                message: `You have received a new message from ${name} (${email}).`,
+                message: `You have received a new message from ${name} (${email}): "${message}"`,
                 type: 'system'
             })
         );

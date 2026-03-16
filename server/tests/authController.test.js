@@ -1,5 +1,6 @@
 const authController = require('../src/controllers/authController');
 const authService = require('../src/services/authService');
+const crypto = require('crypto');
 
 jest.mock('../src/services/authService');
 
@@ -30,23 +31,15 @@ describe('authController', () => {
 
     describe('register', () => {
         test('should register user successfully', async () => {
-            req.body = {
+            req.body = { name: 'John', email: 'john@example.com', password: 'secret123' };
+            const mockUser = {
+                _id: 'user123',
                 name: 'John',
                 email: 'john@example.com',
-                password: 'secret123'
+                role: 'user'
             };
 
-            const serviceResponse = {
-                user: {
-                    _id: 'user123',
-                    name: 'John',
-                    email: 'john@example.com',
-                    role: 'user'
-                },
-                token: 'mock-token'
-            };
-
-            authService.register.mockResolvedValue(serviceResponse);
+            authService.register.mockResolvedValue({ user: mockUser });
 
             await authController.register(req, res, next);
 
@@ -54,12 +47,12 @@ describe('authController', () => {
             expect(res.status).toHaveBeenCalledWith(201);
             expect(res.json).toHaveBeenCalledWith({
                 success: true,
-                token: 'mock-token',
+                message: 'Registration successful. Please login.',
                 user: {
-                    id: 'user123',
-                    name: 'John',
-                    email: 'john@example.com',
-                    role: 'user'
+                    id: mockUser._id,
+                    name: mockUser.name,
+                    email: mockUser.email,
+                    role: mockUser.role
                 }
             });
         });
@@ -125,6 +118,17 @@ describe('authController', () => {
             expect(res.json).toHaveBeenCalledWith({
                 success: true,
                 message: 'Logout successful. Clear token on client.'
+            });
+        });
+    });
+
+    describe('me', () => {
+        test('should return current user', async () => {
+            await authController.me(req, res);
+
+            expect(res.json).toHaveBeenCalledWith({
+                success: true,
+                user: req.user
             });
         });
     });

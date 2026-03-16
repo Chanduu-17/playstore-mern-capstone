@@ -1,0 +1,43 @@
+FAIL tests/authController.test.js
+  authController
+    register
+      ΓêÜ should register user successfully (4 ms)
+      ΓêÜ should call next on register error
+    login
+      ΓêÜ should login user successfully (7 ms)
+      ΓêÜ should call next on login error
+    logout
+      ΓêÜ should logout successfully
+    me
+      ΓêÜ should return current user
+    forgotPassword
+      ΓêÜ should send reset email successfully
+      ΓêÜ should call next on forgotPassword error
+    resetPassword
+      ΓêÜ should reset password successfully
+      ├ù should call next on resetPassword error (2 ms)
+
+  ΓùÅ authController ΓÇ║ resetPassword ΓÇ║ should call next on resetPassword error
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: [Error: Reset password failed]
+    Received: [TypeError: Cannot read properties of undefined (reading 'token')]
+
+    Number of calls: 1
+
+      187 |             await authController.resetPassword(req, res, next);
+      188 |
+    > 189 |             expect(next).toHaveBeenCalledWith(error);
+          |                          ^
+      190 |         });
+      191 |     });
+      192 | });
+
+      at Object.toHaveBeenCalledWith (tests/authController.test.js:189:26)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 9 passed, 10 total
+Snapshots:   0 total
+Time:        1.343 s, estimated 2 s
+Ran all test suites matching /tests\\authController.test.js/i.

@@ -8,6 +8,7 @@ import AppDetailsPage from './pages/AppDetailsPage';
 import OwnerDashboardPage from './pages/OwnerDashboardPage';
 import NotificationsPage from './pages/NotificationsPage';
 import ProfilePage from './pages/ProfilePage';
+import AdminUserPage from './pages/AdminUserPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProtectedRoute from './components/common/ProtectedRoute';
 
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
             <Route path="profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
             <Route path="owner" element={<ProtectedRoute role="owner"><OwnerDashboardPage /></ProtectedRoute>} />
+            <Route path="admin/users" element={<ProtectedRoute role="owner"><AdminUserPage /></ProtectedRoute>} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>

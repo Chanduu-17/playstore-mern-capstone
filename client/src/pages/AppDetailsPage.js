@@ -9,7 +9,7 @@ import { fetchReviews } from '../services/reviewService';
 
 export default function AppDetailsPage() {
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user, updateDownloadedApps } = useAuth();
   const [app, setApp] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [message, setMessage] = useState('');
@@ -31,6 +31,7 @@ export default function AppDetailsPage() {
     try {
       const result = await downloadApp(id);
       setMessage(result.message);
+      updateDownloadedApps(id);
       loadData();
     } catch (err) {
       setError(err.response?.data?.message || 'Download failed');
@@ -64,16 +65,20 @@ export default function AppDetailsPage() {
               
               {!user ? (
                 <Button variant="secondary" onClick={() => window.location.href='/login'}>Login to Download</Button>
-              ) : user.role === 'user' ? (
-                <Button onClick={handleDownload}>Download App</Button>
-              ) : null}
+              ) : (
+                user.downloadedApps?.includes(id) ? (
+                  <Button variant="success" disabled>Downloaded</Button>
+                ) : (
+                  <Button onClick={handleDownload}>Download App</Button>
+                )
+              )}
             </Card.Body>
           </Col>
         </Row>
       </Card>
       <h4>Reviews</h4>
       <ReviewList reviews={reviews} />
-      {user?.role === 'user' && <ReviewForm appId={id} onAdded={loadData} />}
+      {user && <ReviewForm appId={id} onAdded={loadData} />}
     </>
   );
 }

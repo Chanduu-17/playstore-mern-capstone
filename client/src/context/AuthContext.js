@@ -27,7 +27,13 @@ export function AuthProvider({ children }) {
     setUser(null);
   };
 
-  return <AuthContext.Provider value={{ user, login, logout, loading }}>{children}</AuthContext.Provider>;
+  const updateDownloadedApps = (appId) => {
+    const updatedUser = { ...user, downloadedApps: [...(user.downloadedApps || []), appId] };
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+    setUser(updatedUser);
+  };
+
+  return <AuthContext.Provider value={{ user, login, logout, updateDownloadedApps, loading }}>{children}</AuthContext.Provider>;
 }
 
 export const useAuth = () => useContext(AuthContext);

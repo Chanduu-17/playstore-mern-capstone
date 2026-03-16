@@ -39,11 +39,14 @@ export default function NavbarMenu() {
           <Nav className="me-auto">
             <Nav.Link as={NavLink} to="/">Home</Nav.Link>
             {user?.role === 'owner' && (
-              <Nav.Link as={NavLink} to="/owner">Owner Dashboard</Nav.Link>
+              <>
+                <Nav.Link as={NavLink} to="/owner">Owner Dashboard</Nav.Link>
+                <Nav.Link as={NavLink} to="/admin/users">Manage Users</Nav.Link>
+              </>
             )}
           </Nav>
 
-          <Nav className="align-items-center gap-3">
+          <Nav className="align-items-start align-items-lg-center gap-3">
 
             {/* Notification */}
             {user && (
@@ -58,12 +61,12 @@ export default function NavbarMenu() {
             </Nav.Link>
 
             {user ? (
-              <div className="d-flex align-items-center gap-2 text-white">
+              <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center gap-2 text-white">
                 <Nav.Link as={NavLink} to="/profile" className="d-flex align-items-center gap-2 px-0">
                   <FaUserCircle size={30} />
                   <span>{user.name} </span>
                 </Nav.Link>
-                <Button size="sm" variant="outline-light" onClick={handleLogout} className="ms-3">
+                <Button size="sm" variant="outline-light" onClick={handleLogout} className="ms-lg-3 mt-2 mt-lg-0">
                   Logout
                 </Button>
               </div>

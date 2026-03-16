@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const App = require('../models/App');
 const Review = require('../models/Review');
 const User = require('../models/User');
@@ -82,10 +83,12 @@ exports.downloadApp = async (appId, userId) => {
   const app = await App.findById(appId);
   if (!app || !app.visible) throw new Error('App not found');
   const user = await User.findById(userId);
-  if (!user.downloadedApps.some(id => id.toString() === appId)) user.downloadedApps.push(appId);
-  user.save();
-  app.downloadCount += 1;
-  await app.save();
+  if (!user.downloadedApps.some(id => id.toString() === appId)) {
+    user.downloadedApps.push(appId);
+    await user.save();
+    app.downloadCount += 1;
+    await app.save();
+  }
   await createNotification({
     user: app.owner,
     title: 'New app download',
@@ -97,9 +100,10 @@ exports.downloadApp = async (appId, userId) => {
 };
 
 exports.announceUpdate = async (appId, ownerId, message) => {
+  if (!mongoose.Types.ObjectId.isValid(appId)) throw new Error('Invalid app ID');
   const app = await App.findOne({ _id: appId, owner: ownerId });
   if (!app) throw new Error('App not found or not owned by you');
-  const users = await User.find({ downloadedApps: appId });
+  const users = await User.find({ role: 'user' });
   await Promise.all(users.map(user => createNotification({
     user: user._id,
     title: `Update for ${app.name}`,

@@ -10,8 +10,8 @@ exports.authValidation = [
 
 exports.register = async (req, res, next) => {
   try {
-    const { user, token } = await authService.register(req.body);
-    res.status(201).json({ success: true, token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    const { user } = await authService.register(req.body);
+    res.status(201).json({ success: true, message: 'Registration successful. Please login.', user: { id: user._id, name: user.name, email: user.email, role: user.role } });
   } catch (error) {
     next(error);
   }
@@ -20,7 +20,7 @@ exports.register = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const { user, token } = await authService.login(req.body);
-    res.json({ success: true, token, user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    res.json({ success: true, token, user: { id: user._id, name: user.name, email: user.email, role: user.role, downloadedApps: user.downloadedApps } });
   } catch (error) {
     next(error);
   }
